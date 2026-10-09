@@ -1,0 +1,38 @@
+{
+    "name": "PingCore.Netcode.NGO.Tests.Editor",
+    "rootNamespace": "PingCore.Netcode.NGO.Tests.Editor",
+    "references": [
+        "PingCore.Core",
+        "PingCore.Discovery.Client",
+        "PingCore.Discovery.Host",
+        "PingCore.Fleet",
+        "PingCore.Unity",
+        "PingCore.Netcode.NGO",
+        "Unity.Netcode.Runtime",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS",
+        "PINGCORE_NGO"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "[2.0.0,3.0.0)",
+            "define": "PINGCORE_NGO"
+        }
+    ],
+    "noEngineReferences": false
+}

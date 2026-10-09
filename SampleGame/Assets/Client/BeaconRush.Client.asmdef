@@ -1,0 +1,38 @@
+{
+    "name": "BeaconRush.Client",
+    "rootNamespace": "BeaconRush.Client",
+    "references": [
+        "BeaconRush.Game",
+        "PingCore.Core",
+        "PingCore.Discovery.Client",
+        "PingCore.Discovery.Host",
+        "PingCore.Netcode.NGO",
+        "PingCore.Unity",
+        "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "!UNITY_SERVER",
+        "PINGCORE_NGO"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "[2.0.0,3.0.0)",
+            "define": "PINGCORE_NGO"
+        },
+        {
+            "name": "com.unity.multiplayer.playmode",
+            "expression": "[2.0.0,3.0.0)",
+            "define": "PINGCORE_MPPM"
+        }
+    ],
+    "noEngineReferences": false
+}

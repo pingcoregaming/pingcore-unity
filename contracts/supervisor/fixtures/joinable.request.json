@@ -1,0 +1,28 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "supervisor 1.3.4 test suite",
+  "dto": "PingCore.Fleet.Wire.JoinableSessionRequest",
+  "contract": {
+    "source": "supervisor",
+    "method": "POST",
+    "path": "/v1/sessions/{allocationId}/joinable",
+    "direction": "request",
+    "status": 0
+  },
+  "keys": [
+    "queue",
+    "openSeats",
+    "sessionSize",
+    "attributes",
+    "ttlSeconds"
+  ],
+  "payload": {
+    "queue": "ranked",
+    "openSeats": 3,
+    "sessionSize": 8,
+    "attributes": {
+      "skill": 1210
+    },
+    "ttlSeconds": 60
+  }
+}

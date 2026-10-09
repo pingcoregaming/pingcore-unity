@@ -1,0 +1,16 @@
+{
+  "body": "pingcore-body/1",
+  "source": "local SDK endpoint behaviour (supervisor 1.3.4)",
+  "dto": "PingCore.Fleet.Wire.JoinableSessionRecord",
+  "note": "The 200 echo of POST /v1/sessions/match-83a1/joinable.",
+  "payload": {
+    "queue": "ranked",
+    "openSeats": 3,
+    "sessionSize": 8,
+    "attributes": {
+      "skill": 1210
+    },
+    "sessionId": "match-83a1",
+    "ttlSeconds": 60
+  }
+}

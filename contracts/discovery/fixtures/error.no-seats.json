@@ -1,0 +1,24 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 route handler",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/servers/{serverId}/reservations",
+    "direction": "error",
+    "status": 409
+  },
+  "keys": [
+    "error",
+    "message",
+    "reason",
+    "available"
+  ],
+  "payload": {
+    "error": true,
+    "message": "Not enough free seats on this server.",
+    "reason": "no_seats",
+    "available": 1
+  }
+}

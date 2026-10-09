@@ -1,0 +1,26 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/tickets",
+    "direction": "error",
+    "status": 409
+  },
+  "keys": [
+    "error",
+    "message",
+    "reason",
+    "limit",
+    "active"
+  ],
+  "payload": {
+    "error": true,
+    "message": "You already have 1 ticket in the queue. Cancel it with DELETE /v1/apps/dscp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/tickets/{ticketId} or wait for it to match or expire, then retry.",
+    "reason": "too_many_tickets",
+    "limit": 1,
+    "active": 1
+  }
+}

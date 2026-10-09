@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "GET",
+    "path": "/v1/apps/{publicId}/reservations/{reservationId}",
+    "direction": "error",
+    "status": 401
+  },
+  "keys": [
+    "error",
+    "message",
+    "reason"
+  ],
+  "payload": {
+    "error": true,
+    "message": "The player token has expired. Request a new one (anonymous) or sign a new one (studio-signed) and retry.",
+    "reason": "token_expired"
+  }
+}

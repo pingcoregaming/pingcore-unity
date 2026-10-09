@@ -1,0 +1,29 @@
+{
+    "name": "PingCore.Quickstart",
+    "rootNamespace": "PingCore.Quickstart",
+    "references": [
+        "BeaconRush.Game",
+        "BeaconRush.Client",
+        "PingCore.Core",
+        "PingCore.Discovery.Client",
+        "Unity.Netcode.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "!UNITY_SERVER",
+        "PINGCORE_NGO"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "[2.0.0,3.0.0)",
+            "define": "PINGCORE_NGO"
+        }
+    ],
+    "noEngineReferences": false
+}

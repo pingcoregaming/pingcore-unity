@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Host.Wire.VerifyReservationResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "GET",
+    "path": "/v1/reservations/verify/{reservationId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "valid",
+    "reason"
+  ],
+  "payload": {
+    "error": false,
+    "valid": false,
+    "reason": "wrong_server"
+  }
+}

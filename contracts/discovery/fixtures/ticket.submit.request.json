@@ -1,0 +1,24 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.SubmitTicketRequest",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/tickets",
+    "direction": "request",
+    "status": 0
+  },
+  "keys": [
+    "ticketId",
+    "queue",
+    "sessionSize",
+    "partySize"
+  ],
+  "payload": {
+    "ticketId": "party-77",
+    "queue": "ranked",
+    "sessionSize": 8,
+    "partySize": 2
+  }
+}

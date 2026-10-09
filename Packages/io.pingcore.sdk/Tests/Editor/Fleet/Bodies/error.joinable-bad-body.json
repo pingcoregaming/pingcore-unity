@@ -1,0 +1,9 @@
+{
+  "body": "pingcore-body/1",
+  "source": "local SDK endpoint behaviour (supervisor 1.3.4)",
+  "dto": "PingCore.Fleet.Wire.LocalSdkMessage",
+  "note": "The 400 body of a joinable publish whose openSeats is not a non-negative integer.",
+  "payload": {
+    "message": "openSeats must be a non-negative integer"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 route handler",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "DELETE",
+    "path": "/v1/apps/{publicId}/tickets/{ticketId}",
+    "direction": "error",
+    "status": 409
+  },
+  "keys": [
+    "error",
+    "message"
+  ],
+  "payload": {
+    "error": true,
+    "message": "This ticket already matched; release the allocation instead."
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PingCore JoinTicket v1",
+  "description": "The connect handshake payload a client serialises into NetworkConfig.ConnectionData (https://pingcore.io/docs/fleets/admitting-players). The game server's PingCoreConnectionApproval decodes it and applies the accept matrix before any other work. Player tokens never travel in this payload.",
+  "$comment": "Size cap: the UTF-8 encoding of the serialised JSON must be at most 1024 bytes, so it fits one Unity Transport packet. JSON Schema cannot express a byte length; the encoder and the decoder enforce it, and every example is checked against it.",
+  "type": "object",
+  "properties": {
+    "v": {
+      "description": "Payload format version.",
+      "const": 1
+    },
+    "kind": {
+      "description": "How the player was sent to this game server. reservation: a Discovery reservation or quick join. match: a matchmaking allocation. backfill: a backfill allocation into a running session. lan: a listen host started with LAN only.",
+      "type": "string",
+      "enum": ["reservation", "match", "backfill", "lan"]
+    },
+    "protocolVersion": {
+      "description": "The game's own network protocol version, compared by the game server before it admits the player.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "playerId": {
+      "description": "The player id from the player-token response (for example anon:<uuid>).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "reservationId": {
+      "description": "Required when kind is reservation.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "ticketId": {
+      "description": "Required when kind is match or backfill. Always minted by the SDK as 128 random bits (base64url), never chosen by the caller.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "allocationId": {
+      "description": "Required when kind is match or backfill.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "displayName": {
+      "description": "Optional name shown to other players.",
+      "type": "string",
+      "maxLength": 32
+    }
+  },
+  "required": ["v", "kind", "protocolVersion", "playerId"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": { "kind": { "const": "reservation" } },
+        "required": ["kind"]
+      },
+      "then": { "required": ["reservationId"] }
+    },
+    {
+      "if": {
+        "properties": { "kind": { "enum": ["match", "backfill"] } },
+        "required": ["kind"]
+      },
+      "then": { "required": ["ticketId", "allocationId"] }
+    }
+  ]
+}

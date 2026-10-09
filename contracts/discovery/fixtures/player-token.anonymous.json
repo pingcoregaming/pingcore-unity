@@ -1,0 +1,28 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.PlayerTokenResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/player-tokens",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "token",
+    "tokenType",
+    "playerId",
+    "expiresAt",
+    "expiresIn"
+  ],
+  "payload": {
+    "error": false,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwaW5nY29yZS1kaXNjb3ZlcnkiLCJhdWQiOiJkc2NwX2FhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhIiwic3ViIjoiYW5vbjpjZmUxYjQ3Zi1jZDRhLTQ0MWUtOWNiZS1hOWU4NTM3ZjMyYjEiLCJpYXQiOjE3NTY3Nzg0MDAsImV4cCI6MTc1NjgwMDAwMH0.pbPmSgBe3lxf05P5egt3Rszx1nV4PYoYbYEKXmKawGI",
+    "tokenType": "anonymous",
+    "playerId": "anon:cfe1b47f-cd4a-441e-9cbe-a9e8537f32b1",
+    "expiresAt": 1756800000000,
+    "expiresIn": 21600
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "PingCore.Editor.Workspace",
+    "rootNamespace": "PingCore.Editor.Workspace",
+    "references": [
+        "PingCore.Editor",
+        "PingCore.Core",
+        "PingCore.Discovery.Client"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

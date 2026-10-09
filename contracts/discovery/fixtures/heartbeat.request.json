@@ -1,0 +1,28 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Host.Wire.HeartbeatRequest",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/heartbeat",
+    "direction": "request",
+    "status": 0
+  },
+  "keys": [
+    "serverId",
+    "name",
+    "ip",
+    "port",
+    "players",
+    "maxPlayers"
+  ],
+  "payload": {
+    "serverId": "self-1",
+    "name": "Self-hosted self-1",
+    "ip": "203.0.113.41",
+    "port": 27015,
+    "players": 0,
+    "maxPlayers": 8
+  }
+}

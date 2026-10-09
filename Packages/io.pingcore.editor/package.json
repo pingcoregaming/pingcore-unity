@@ -1,0 +1,28 @@
+{
+  "name": "io.pingcore.editor",
+  "version": "0.1.1",
+  "displayName": "PingCore Editor",
+  "description": "Editor tooling for PingCore: sign in to your workspace, build a Linux dedicated game server, push it and release it onto a fleet from one window, confirm the shipped heartbeat token, and the player build guard that keeps credentials out of builds. Editor only; never ships in a player build.",
+  "unity": "6000.0",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "PingCore",
+    "url": "https://pingcore.io"
+  },
+  "documentationUrl": "https://github.com/pingcoregaming/pingcore-unity/blob/main/Packages/io.pingcore.editor/README.md",
+  "changelogUrl": "https://github.com/pingcoregaming/pingcore-unity/blob/main/Packages/io.pingcore.editor/CHANGELOG.md",
+  "licensesUrl": "https://github.com/pingcoregaming/pingcore-unity/blob/main/LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pingcoregaming/pingcore-unity.git"
+  },
+  "keywords": [
+    "pingcore",
+    "editor",
+    "build"
+  ],
+  "dependencies": {
+    "io.pingcore.sdk": "0.1.1",
+    "com.unity.nuget.newtonsoft-json": "3.2.2"
+  }
+}

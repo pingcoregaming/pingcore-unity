@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.ReleaseReservationResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "DELETE",
+    "path": "/v1/apps/{publicId}/reservations/{reservationId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "reservationId",
+    "released"
+  ],
+  "payload": {
+    "error": false,
+    "reservationId": "mine-to-release",
+    "released": true
+  }
+}

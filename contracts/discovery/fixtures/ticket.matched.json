@@ -1,0 +1,46 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.TicketResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "GET",
+    "path": "/v1/apps/{publicId}/tickets/{ticketId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "ticketId",
+    "status",
+    "queue",
+    "allocationId",
+    "serverId",
+    "ip",
+    "port",
+    "backfill",
+    "location",
+    "matchedAt",
+    "ownerKind",
+    "ownerPlayerId",
+    "createdAt",
+    "expiresAt"
+  ],
+  "payload": {
+    "error": false,
+    "ticketId": "party-77",
+    "status": "matched",
+    "queue": "ranked",
+    "allocationId": "9b2f6c1e-4d7a-4f0e-8a3b-2c5d7e9f1a40",
+    "serverId": "agent-a-1",
+    "ip": "203.0.113.10",
+    "port": 27015,
+    "backfill": false,
+    "location": null,
+    "matchedAt": 1790938521892,
+    "ownerKind": "backend",
+    "ownerPlayerId": null,
+    "createdAt": 1790938521881,
+    "expiresAt": 1790938821881
+  }
+}

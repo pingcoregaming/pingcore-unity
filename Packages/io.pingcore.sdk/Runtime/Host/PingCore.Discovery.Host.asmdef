@@ -1,0 +1,19 @@
+{
+    "name": "PingCore.Discovery.Host",
+    "rootNamespace": "PingCore.Discovery.Host",
+    "references": [
+        "PingCore.Core",
+        "PingCore.Unity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

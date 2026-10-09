@@ -1,0 +1,40 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "supervisor 1.3.4 test suite",
+  "dto": "PingCore.Fleet.Wire.GameServerView",
+  "contract": {
+    "source": "supervisor",
+    "method": "GET",
+    "path": "/gameserver",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "object_meta",
+    "status"
+  ],
+  "payload": {
+    "object_meta": {
+      "name": "gameserver-42",
+      "namespace": "default",
+      "labels": {},
+      "annotations": {
+        "pingcore.io/allocation-id": "match-1",
+        "pingcore.io/allocation-context": "{\"mode\":\"ranked\"}",
+        "pingcore.io/backfill-id": "b1",
+        "pingcore.io/backfill-context": "{\"backfill\":true,\"sessionId\":\"match-1\",\"roster\":[]}"
+      }
+    },
+    "status": {
+      "state": "Allocated",
+      "address": "203.0.113.1",
+      "ports": [
+        {
+          "name": "game",
+          "port": 27015
+        }
+      ],
+      "counters": {}
+    }
+  }
+}

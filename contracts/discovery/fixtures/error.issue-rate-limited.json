@@ -1,0 +1,20 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/player-tokens",
+    "direction": "error",
+    "status": 429
+  },
+  "keys": [
+    "error",
+    "message"
+  ],
+  "payload": {
+    "error": true,
+    "message": "Too many player-token requests from this address. Reuse the token you already have; tokens are valid for several hours."
+  }
+}

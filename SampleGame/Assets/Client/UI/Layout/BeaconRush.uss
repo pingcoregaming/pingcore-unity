@@ -1,0 +1,489 @@
+/* Beacon Rush client UI (UI Toolkit runtime). Colours: panel navy, accent cyan, beacon gold. */
+
+.br-root {
+    flex-grow: 1;
+    color: rgb(226, 232, 244);
+    font-size: 15px;
+}
+
+.br-screen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+.br-centre {
+    align-items: center;
+    justify-content: center;
+}
+
+.br-panel {
+    background-color: rgba(14, 18, 28, 0.88);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(98, 214, 255, 0.25);
+    border-right-color: rgba(98, 214, 255, 0.25);
+    border-top-color: rgba(98, 214, 255, 0.25);
+    border-bottom-color: rgba(98, 214, 255, 0.25);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 18px 22px;
+}
+
+.br-menu {
+    width: 380px;
+}
+
+.br-form {
+    width: 460px;
+}
+
+.br-wide {
+    width: 820px;
+    max-height: 92%;
+}
+
+.br-title {
+    font-size: 40px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 92);
+    -unity-text-align: middle-center;
+    letter-spacing: 4px;
+    margin-bottom: 2px;
+}
+
+.br-subtitle {
+    -unity-text-align: middle-center;
+    color: rgb(160, 176, 204);
+    margin-bottom: 14px;
+}
+
+.br-heading {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 92);
+    margin-bottom: 8px;
+}
+
+.br-caption {
+    font-size: 12px;
+    -unity-font-style: bold;
+    letter-spacing: 2px;
+    color: rgb(98, 214, 255);
+    margin-bottom: 4px;
+}
+
+.br-hint {
+    color: rgb(150, 164, 190);
+    font-size: 13px;
+    white-space: normal;
+    margin-top: 2px;
+    margin-bottom: 6px;
+}
+
+.br-footnote {
+    color: rgb(104, 116, 140);
+    font-size: 11px;
+    -unity-text-align: middle-center;
+    margin-top: 8px;
+}
+
+.br-status-line {
+    white-space: normal;
+    margin-top: 6px;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.br-warning {
+    white-space: normal;
+    color: rgb(255, 160, 120);
+    margin-bottom: 6px;
+}
+
+.br-row {
+    flex-direction: row;
+    align-items: center;
+}
+
+.br-spread {
+    justify-content: space-between;
+}
+
+.br-grow {
+    flex-grow: 1;
+}
+
+.br-inline {
+    margin-right: 6px;
+    margin-bottom: 0;
+}
+
+.br-links {
+    justify-content: space-between;
+    margin-top: 6px;
+}
+
+/* Buttons. The theme styles .unity-button; two classes outrank it. */
+
+.unity-button.br-button {
+    height: 40px;
+    margin: 4px 0;
+    font-size: 16px;
+    color: rgb(226, 232, 244);
+    background-color: rgb(34, 44, 66);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(58, 72, 102);
+    border-right-color: rgb(58, 72, 102);
+    border-top-color: rgb(58, 72, 102);
+    border-bottom-color: rgb(58, 72, 102);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    transition-duration: 0.12s;
+}
+
+.br-row > .unity-button.br-button {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.unity-button.br-button:hover {
+    background-color: rgb(46, 60, 90);
+    border-left-color: rgb(98, 214, 255);
+    border-right-color: rgb(98, 214, 255);
+    border-top-color: rgb(98, 214, 255);
+    border-bottom-color: rgb(98, 214, 255);
+}
+
+.unity-button.br-button:active {
+    background-color: rgb(28, 36, 54);
+}
+
+.unity-button.br-primary {
+    background-color: rgb(255, 196, 61);
+    color: rgb(28, 22, 8);
+    -unity-font-style: bold;
+    border-left-color: rgb(255, 222, 140);
+    border-right-color: rgb(255, 222, 140);
+    border-top-color: rgb(255, 222, 140);
+    border-bottom-color: rgb(255, 222, 140);
+}
+
+.unity-button.br-primary:hover {
+    background-color: rgb(255, 214, 110);
+}
+
+.unity-button.br-secondary {
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+}
+
+.unity-button.br-small {
+    height: 30px;
+    font-size: 13px;
+    padding: 0 14px;
+}
+
+.unity-button:disabled {
+    opacity: 0.45;
+}
+
+.unity-button.br-link {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    color: rgb(98, 214, 255);
+    font-size: 13px;
+    padding: 2px 4px;
+    margin: 0;
+}
+
+.unity-button.br-link:hover {
+    color: rgb(170, 234, 255);
+}
+
+.unity-button.br-tab,
+.unity-button.br-chip {
+    height: 28px;
+    font-size: 13px;
+    margin: 2px 3px;
+    padding: 0 12px;
+    color: rgb(190, 202, 224);
+    background-color: rgb(26, 34, 52);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(52, 64, 92);
+    border-right-color: rgb(52, 64, 92);
+    border-top-color: rgb(52, 64, 92);
+    border-bottom-color: rgb(52, 64, 92);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.unity-button.br-selected {
+    background-color: rgb(98, 214, 255);
+    color: rgb(10, 20, 30);
+    -unity-font-style: bold;
+}
+
+.br-tabs {
+    margin-bottom: 6px;
+}
+
+.br-filters {
+    margin-bottom: 6px;
+}
+
+/* Fields and toggles. */
+
+.br-field {
+    margin: 4px 0 6px 0;
+}
+
+.br-field > .unity-label {
+    min-width: 110px;
+    color: rgb(170, 182, 206);
+}
+
+.br-field .unity-base-text-field__input {
+    background-color: rgb(20, 26, 40);
+    color: rgb(236, 240, 250);
+    border-left-color: rgb(58, 72, 102);
+    border-right-color: rgb(58, 72, 102);
+    border-top-color: rgb(58, 72, 102);
+    border-bottom-color: rgb(58, 72, 102);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 4px 6px;
+    min-height: 28px;
+}
+
+.br-toggle {
+    margin-right: 14px;
+}
+
+.br-toggle > .unity-label {
+    min-width: 0;
+    color: rgb(190, 202, 224);
+}
+
+/* Browser table. */
+
+.br-table-head {
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(52, 64, 92);
+    padding-bottom: 4px;
+    margin-top: 4px;
+}
+
+.br-table-head > .unity-label {
+    color: rgb(120, 136, 166);
+    font-size: 12px;
+    -unity-font-style: bold;
+}
+
+.br-list {
+    height: 300px;
+    margin-bottom: 6px;
+}
+
+.br-list-row {
+    flex-direction: row;
+    align-items: center;
+    height: 34px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(52, 64, 92, 0.5);
+}
+
+.br-col-name {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+}
+
+.br-col-num {
+    width: 72px;
+    -unity-text-align: middle-right;
+    padding-right: 10px;
+}
+
+.br-col-version {
+    width: 150px;
+    color: rgb(150, 164, 190);
+    overflow: hidden;
+}
+
+.br-col-action {
+    width: 76px;
+}
+
+.br-list-row > .unity-button.br-chip {
+    width: 70px;
+}
+
+/* HUD. */
+
+.br-hud {
+    display: none;
+}
+
+.br-hud-top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px;
+}
+
+.br-scores {
+    width: 250px;
+    padding: 10px 14px;
+}
+
+.br-score-row {
+    flex-direction: row;
+    align-items: center;
+    height: 28px;
+}
+
+.br-score-row > .unity-label {
+    -unity-text-align: middle-left;
+    margin: 0;
+    padding: 0;
+}
+
+.br-score-row.br-local {
+    background-color: rgba(98, 214, 255, 0.12);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.br-swatch {
+    width: 12px;
+    height: 12px;
+    margin-left: 4px;
+    margin-right: 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.br-score-name {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.br-score-row > .br-score-value {
+    width: 36px;
+    -unity-text-align: middle-right;
+    -unity-font-style: bold;
+    margin-right: 4px;
+}
+
+.br-hud-centre {
+    align-items: center;
+    flex-grow: 1;
+}
+
+.br-hud-right {
+    width: 250px;
+    align-items: flex-end;
+}
+
+.br-phase {
+    font-size: 15px;
+    -unity-font-style: bold;
+    letter-spacing: 3px;
+    color: rgb(98, 214, 255);
+}
+
+.br-timer {
+    font-size: 44px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.br-shadowed {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.br-help {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    color: rgb(190, 202, 224);
+}
+
+.br-results-card {
+    position: absolute;
+    top: 38%;
+    left: 30%;
+    right: 30%;
+    align-items: center;
+    display: none;
+}
+
+.br-winner {
+    font-size: 28px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 92);
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+/* Status bar. */
+
+.br-status {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 56px;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(14, 18, 28, 0.94);
+    border-left-width: 3px;
+    border-left-color: rgb(255, 196, 61);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 10px 14px;
+    display: none;
+}
+
+.br-status.br-error {
+    border-left-color: rgb(255, 110, 100);
+}
+
+.br-status-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    white-space: normal;
+}

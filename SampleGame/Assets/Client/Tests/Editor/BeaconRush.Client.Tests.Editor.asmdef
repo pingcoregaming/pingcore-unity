@@ -1,0 +1,33 @@
+{
+    "name": "BeaconRush.Client.Tests.Editor",
+    "rootNamespace": "BeaconRush.Client.Tests",
+    "references": [
+        "BeaconRush.Client",
+        "BeaconRush.Game",
+        "BeaconRush.Editor",
+        "PingCore.Editor",
+        "PingCore.Core",
+        "PingCore.Discovery.Client",
+        "PingCore.Netcode.NGO",
+        "Unity.Netcode.Runtime",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS",
+        "!UNITY_SERVER"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

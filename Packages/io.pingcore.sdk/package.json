@@ -1,0 +1,37 @@
+{
+  "name": "io.pingcore.sdk",
+  "version": "0.1.1",
+  "displayName": "PingCore SDK",
+  "description": "Runtime SDK for PingCore game servers: Discovery (server list, reservations, quick join, matchmaking tickets), the self-hosted heartbeat tier, and the local SDK shim for PingCore-hosted fleet game servers, with optional Netcode for GameObjects connection approval.",
+  "unity": "6000.0",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "PingCore",
+    "url": "https://pingcore.io"
+  },
+  "documentationUrl": "https://github.com/pingcoregaming/pingcore-unity/blob/main/Packages/io.pingcore.sdk/README.md",
+  "changelogUrl": "https://github.com/pingcoregaming/pingcore-unity/blob/main/Packages/io.pingcore.sdk/CHANGELOG.md",
+  "licensesUrl": "https://github.com/pingcoregaming/pingcore-unity/blob/main/LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pingcoregaming/pingcore-unity.git"
+  },
+  "keywords": [
+    "pingcore",
+    "multiplayer",
+    "matchmaking",
+    "dedicated-server",
+    "netcode"
+  ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.2",
+    "com.unity.modules.unitywebrequest": "1.0.0"
+  },
+  "samples": [
+    {
+      "displayName": "Quickstart",
+      "description": "Beacon Rush on PingCore in one scene: an anonymous player token, a matchmaking ticket and a Netcode for GameObjects join into your own Beacon Rush fleet, plus a LAN game on your own PC. Needs Netcode for GameObjects 2.11.2. Import it, open Quickstart.unity and press Play.",
+      "path": "Samples~/Quickstart"
+    }
+  ]
+}

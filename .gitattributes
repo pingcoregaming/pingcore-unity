@@ -1,0 +1,35 @@
+# Normalise text files to LF in the repository; let git pick the working-tree ending.
+* text=auto
+
+# Unity and .NET sources and serialized assets are LF everywhere, so Unity's YAML, the .meta GUID
+# files and the C# sources diff the same on every machine.
+*.cs      text eol=lf
+*.asmdef  text eol=lf
+*.json    text eol=lf
+*.meta    text eol=lf
+*.asset   text eol=lf
+*.unity   text eol=lf
+*.prefab  text eol=lf
+*.mat     text eol=lf
+*.uxml    text eol=lf
+*.uss     text eol=lf
+*.tss     text eol=lf
+*.jslib   text eol=lf
+*.shader  text eol=lf
+
+# Shell scripts run inside Linux (WSL, Docker): a CR at a line end breaks them.
+*.sh      text eol=lf
+
+# Images and fonts are binary: never normalised, never diffed or merged as text.
+*.png     binary
+*.jpg     binary
+*.ttf     binary
+*.otf     binary
+
+# The pingctl executables the Editor package bundles have no extension on macOS and Linux, so name them by path:
+# binary, never normalised or diffed. (The execute bit is set in the index with git update-index --chmod=+x.)
+Packages/io.pingcore.editor/Tools~/pingctl/*/* binary
+
+# cmd.exe misreads labels and goto in LF batch files, so batch files keep CRLF.
+*.cmd     text eol=crlf
+*.bat     text eol=crlf

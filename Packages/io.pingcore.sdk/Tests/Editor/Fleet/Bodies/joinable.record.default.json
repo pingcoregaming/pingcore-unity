@@ -1,0 +1,11 @@
+{
+  "body": "pingcore-body/1",
+  "source": "local SDK endpoint behaviour (supervisor 1.3.4)",
+  "dto": "PingCore.Fleet.Wire.JoinableSessionRecord",
+  "note": "The record a body of only openSeats publishes: queue defaults to default.",
+  "payload": {
+    "queue": "default",
+    "openSeats": 2,
+    "sessionId": "match-1"
+  }
+}

@@ -1,0 +1,878 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PingCore local SDK endpoint",
+    "version": "1.3.4",
+    "description": "The HTTP surface the supervisor serves to the GAME PROCESS inside its own container, on\n`127.0.0.1:$AGONES_SDK_HTTP_PORT` (default 9358; `fleet.integration.sdkPort` overrides).\nThere is no second container and no authentication: nothing outside the container can reach it.\n\nThree groups of routes: the Agones-compatible REST surface (grpc-gateway shape; int64 values are\nstrings), the native session extensions under `/v1/`, and the PingCore extensions under\n`/pingcore/`. Any other route answers JSON 501 `{\"error\":\"not_implemented\"}`.\n\nIntegration rule: every write verb (POST, PUT, PATCH, DELETE) marks the game integrated,\nincluding a refused or no-op write; no GET does. An integrated game reports `draining` to\nDiscovery until it calls `POST /ready`. The stock Agones Unity SDK pings `POST /health` from\n`Start()`, so adding that component integrates the game from its first frame."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:{port}",
+      "description": "Inside the game server container only",
+      "variables": {
+        "port": {
+          "default": "9358",
+          "description": "AGONES_SDK_HTTP_PORT"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Agones",
+      "description": "Stock Agones SDK routes (actioned)"
+    },
+    {
+      "name": "Agones alpha",
+      "description": "Agones alpha player tracking (acknowledged no-ops)"
+    },
+    {
+      "name": "Agones beta",
+      "description": "Agones beta Lists (always NotFound: no list can be declared)"
+    },
+    {
+      "name": "Native",
+      "description": "PingCore session extensions: session end, joinable sessions, backfills"
+    },
+    {
+      "name": "PingCore",
+      "description": "PingCore extensions: Discovery reservations for this game server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Reservation": {
+        "type": "object",
+        "description": "A live Discovery reservation on this game server. Exactly the Discovery frame minus `type`.",
+        "required": [
+          "reservationId",
+          "serverId",
+          "seats",
+          "playerIds",
+          "context",
+          "expiresAt",
+          "ownerKind",
+          "ownerPlayerId"
+        ],
+        "properties": {
+          "reservationId": {
+            "type": "string"
+          },
+          "serverId": {
+            "type": "string",
+            "description": "This game server's Discovery server id"
+          },
+          "seats": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "playerIds": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "description": "Who may use the reservation; null when it holds open seats without naming players"
+          },
+          "context": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Caller-supplied data for the game, verbatim"
+          },
+          "expiresAt": {
+            "type": "integer",
+            "description": "Epoch milliseconds; never served after this"
+          },
+          "ownerKind": {
+            "type": "string",
+            "enum": [
+              "backend",
+              "player"
+            ]
+          },
+          "ownerPlayerId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Counter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "count": {
+            "type": "string",
+            "description": "int64 as a string"
+          },
+          "capacity": {
+            "type": "string",
+            "description": "int64 as a string"
+          }
+        }
+      },
+      "KeyValue": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "GameServer": {
+        "type": "object",
+        "properties": {
+          "object_meta": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "namespace": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "annotations": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": [
+                  "Scheduled",
+                  "Ready",
+                  "Allocated",
+                  "Shutdown"
+                ]
+              },
+              "address": {
+                "type": "string"
+              },
+              "ports": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "port": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "counters": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/ready": {
+      "post": {
+        "summary": "sdk.Ready() - the game can take players",
+        "description": "Marks the game ready (and integrated). Until then an integrated game reports `draining` to Discovery.",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      }
+    },
+    "/health": {
+      "post": {
+        "summary": "Agones health ping",
+        "description": "Accepted and acknowledged; the supervisor's own health checker owns\nreal health. A write, so it INTEGRATES the game: the stock Agones\nUnity SDK starts this loop in `Start()`, so adding that component\nintegrates the game from its first frame and the server reports\n`draining` until the game calls `POST /ready`.\n",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      }
+    },
+    "/shutdown": {
+      "post": {
+        "summary": "sdk.Shutdown() - drain this game server",
+        "description": "Reports `draining` to Discovery and arms the fleet recycle policy.",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      }
+    },
+    "/allocate": {
+      "post": {
+        "summary": "sdk.Allocate() - self-allocation",
+        "description": "The game claims itself; tracked as a synthetic session so the server reads `in_session`. Integrates the game.",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      }
+    },
+    "/gameserver": {
+      "get": {
+        "summary": "The Agones GameServer view",
+        "description": "`object_meta.{name,labels,annotations}` and\n`status.{state,address,ports,counters}`; counter values are strings.\nThe allocation context rides on the annotations\n`pingcore.io/allocation-id` / `pingcore.io/allocation-context`, the\nlatest backfill on `pingcore.io/backfill-id` /\n`pingcore.io/backfill-context`.\n",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "GameServer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameServer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/watch/gameserver": {
+      "get": {
+        "summary": "Watch the GameServer view",
+        "description": "Newline-delimited JSON, one `{\"result\": <GameServer>}` per line; the\nfirst line at once, then one per change.\n",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "NDJSON stream of `{result: GameServer}`"
+          }
+        }
+      }
+    },
+    "/v1beta1/counters/{name}": {
+      "get": {
+        "summary": "Read a counter",
+        "description": "A counter the fleet block declares or the game has set. A capacity the game never set is the fleet block's.",
+        "tags": [
+          "Agones"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The counter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Neither declared nor set: `{message}`"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a counter",
+        "description": "Body `{count?, countDiff?, capacity?}` (integers, or integer strings).\nThe echo uses the same capacity fallback as GET. Integrates\nthe game.\n",
+        "tags": [
+          "Agones"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  },
+                  "countDiff": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  },
+                  "capacity": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The counter after the update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A value is not an integer: `{message}`"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{allocationId}/ended": {
+      "post": {
+        "summary": "End a session (or a backfill)",
+        "description": "Native extension. Ending a real session also withdraws the joinable\nrecord and ends every backfill delivered into it; ending a backfill\nid ends only that backfill. Integrates the game.\n",
+        "tags": [
+          "Native"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "allocationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{allocationId}/joinable": {
+      "post": {
+        "summary": "Publish the joinable-session record (open seats for backfill)",
+        "description": "Native extension on the local Agones-compatible SDK server (127.0.0.1\nonly, NOT the container API). The game announces that the running\nsession `allocationId` accepts `openSeats` more players from the\nmatchmaker queue `queue`. The supervisor stores a shadow copy and\nforwards it to Discovery as a `joinableSession` frame; republishing\nreplaces it. The path `allocationId` is sent as the record's\n`sessionId` and echoed by Discovery in every backfill's context.\n\nRepublish `openSeats = maxPlayers - connected - expectedJoiners`\nwhenever seats change and at least every `ttlSeconds / 2`.\n`expectedJoiners` MUST include every roster entry from\n`GET /v1/backfills` that has not yet connected: a publish overwrites\nthe supervisor's own lowering of the record after a backfill.\n",
+        "tags": [
+          "Native"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "allocationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The running session's allocation id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "openSeats"
+                ],
+                "properties": {
+                  "queue": {
+                    "type": "string",
+                    "default": "default"
+                  },
+                  "openSeats": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "sessionSize": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "number"
+                    }
+                  },
+                  "ttlSeconds": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The stored shadow record as forwarded to Discovery"
+          },
+          "400": {
+            "description": "Malformed body (`message` names the field)"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Withdraw the joinable-session record",
+        "description": "Native extension on the local SDK server. Stops backfill into the\nsession: the supervisor clears its shadow and forwards\n`joinableSessionWithdrawn` to Discovery. Idempotent. The supervisor\nalso withdraws automatically when the session is ended via\n`POST /v1/sessions/{allocationId}/ended`.\n",
+        "tags": [
+          "Native"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "allocationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Withdrawn (or nothing was published)"
+          }
+        }
+      }
+    },
+    "/v1/backfills": {
+      "get": {
+        "summary": "Backfills Discovery delivered into the running session",
+        "description": "Native extension on the local SDK server. Lists every backfill\n(players matched by the matchmaker INTO this server's running\nsession) that has not yet been ended, oldest first. `context.roster`\nis the incoming players; `sessionId` is the session they join. The\ngame authorises connecting players against these rosters and counts\nnot-yet-connected joiners in `expectedJoiners` when it republishes\nits joinable record. The most recent entry also rides on the\nGameServer view annotations `pingcore.io/backfill-id` and\n`pingcore.io/backfill-context`.\n",
+        "tags": [
+          "Native"
+        ],
+        "responses": {
+          "200": {
+            "description": "Live backfills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "backfills": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "allocationId": {
+                            "type": "string"
+                          },
+                          "sessionId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "claims": {
+                            "type": "object"
+                          },
+                          "context": {
+                            "type": "object",
+                            "nullable": true
+                          },
+                          "deliveredAt": {
+                            "type": "integer",
+                            "description": "epoch ms"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pingcore/reservations": {
+      "get": {
+        "summary": "List the live Discovery reservations for this game server",
+        "description": "PingCore extension on the local SDK endpoint (127.0.0.1 only). Every\nreservation Discovery holds on this game server that has not been\nreleased and has not passed its `expiresAt`, soonest-expiring first.\nThe list is empty until the fleet agent has connected, and is rebuilt\nfrom Discovery's replay after every reconnect. A read: it does not\nmark the game integrated.\n",
+        "tags": [
+          "PingCore"
+        ],
+        "responses": {
+          "200": {
+            "description": "The live reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "reservations"
+                  ],
+                  "properties": {
+                    "reservations": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Reservation"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pingcore/reservations/{reservationId}": {
+      "get": {
+        "summary": "Look up one live Discovery reservation",
+        "description": "PingCore extension on the local SDK endpoint. The reservation a\nconnecting player presents, if it is live on THIS game server.\nAdmit the player when `playerIds` contains the id they present (or,\nfor `playerIds: null`, by the game's own rule for open seats), within\n`seats`. A 404 means unknown, released or expired: refuse the join.\n",
+        "tags": [
+          "PingCore"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The reservation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reservation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown, released or expired",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "reservation not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metadata/label": {
+      "put": {
+        "summary": "sdk.SetLabel() - actioned",
+        "description": "Body `{key, value}`. Stored; flows into the Discovery server `meta`\nUNDER the platform's serverMeta (platform keys win). 400 when the\nmerged meta would pass 2048 bytes. Integrates the game.\n",
+        "tags": [
+          "Agones"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KeyValue"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          },
+          "400": {
+            "description": "`{message}`"
+          }
+        }
+      }
+    },
+    "/metadata/annotation": {
+      "put": {
+        "summary": "sdk.SetAnnotation() - actioned",
+        "description": "Body `{key, value}`. Stored on the local GameServer view only (never sent to Discovery); 400 past 2048 bytes. Integrates the game.",
+        "tags": [
+          "Agones"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KeyValue"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          },
+          "400": {
+            "description": "`{message}`"
+          }
+        }
+      }
+    },
+    "/reserve": {
+      "post": {
+        "summary": "sdk.Reserve() - acknowledged no-op",
+        "description": "There is no Reserved state in the fleet model. Discovery reservations are read on `GET /pingcore/reservations` instead. Integrates the game.",
+        "tags": [
+          "Agones"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      }
+    },
+    "/alpha/player/capacity": {
+      "put": {
+        "summary": "Alpha player tracking - acknowledged no-op",
+        "tags": [
+          "Agones alpha"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{}`"
+          }
+        }
+      },
+      "get": {
+        "summary": "Alpha player tracking - reports nothing tracked",
+        "tags": [
+          "Agones alpha"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{\"count\":\"0\"}`"
+          }
+        }
+      }
+    },
+    "/alpha/player/connect": {
+      "post": {
+        "summary": "Alpha player tracking - acknowledged no-op",
+        "description": "Answers `{\"bool\":true}` so a game gating admission on it does not reject every player.",
+        "tags": [
+          "Agones alpha"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{\"bool\":true}`"
+          }
+        }
+      }
+    },
+    "/alpha/player/disconnect": {
+      "post": {
+        "summary": "Alpha player tracking - acknowledged no-op",
+        "tags": [
+          "Agones alpha"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{\"bool\":true}`"
+          }
+        }
+      }
+    },
+    "/alpha/player/count": {
+      "get": {
+        "summary": "Alpha player tracking - reports nothing tracked",
+        "tags": [
+          "Agones alpha"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{\"count\":\"0\"}`"
+          }
+        }
+      }
+    },
+    "/alpha/player/connected": {
+      "get": {
+        "summary": "Alpha player tracking - reports nothing tracked",
+        "tags": [
+          "Agones alpha"
+        ],
+        "responses": {
+          "200": {
+            "description": "`{\"list\":[]}`"
+          }
+        }
+      }
+    },
+    "/alpha/player/connected/{playerId}": {
+      "get": {
+        "summary": "Alpha player tracking - reports nothing tracked",
+        "tags": [
+          "Agones alpha"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playerId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`{\"bool\":false}`"
+          }
+        }
+      }
+    },
+    "/v1beta1/lists/{name}": {
+      "get": {
+        "summary": "Beta Lists - always NotFound",
+        "description": "The fleet data model declares no lists, so every list is a JSON 404 `{message}`.",
+        "tags": [
+          "Agones beta"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "`{\"message\":\"list <name> not found\"}`"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Beta Lists - always NotFound (integrates the game)",
+        "tags": [
+          "Agones beta"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "`{message}`"
+          }
+        }
+      }
+    },
+    "/v1beta1/lists/{name}:{action}": {
+      "post": {
+        "summary": "Beta Lists addValue / removeValue - always NotFound (integrates the game)",
+        "tags": [
+          "Agones beta"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "addValue",
+                "removeValue"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "`{message}`"
+          }
+        }
+      }
+    }
+  }
+}

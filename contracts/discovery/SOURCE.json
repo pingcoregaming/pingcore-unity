@@ -1,0 +1,6 @@
+{
+  "service": "PingCore Discovery",
+  "version": "1.5.1",
+  "fetchedFrom": "https://discovery.pingcore.io/openapi.json",
+  "fetchedAt": "2026-10-02"
+}

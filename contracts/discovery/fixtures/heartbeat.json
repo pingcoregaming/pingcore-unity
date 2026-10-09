@@ -1,0 +1,30 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Host.Wire.HeartbeatResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/heartbeat",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "serverId",
+    "ip",
+    "expiresIn",
+    "verificationMode",
+    "verified",
+    "lastProbeError"
+  ],
+  "payload": {
+    "error": false,
+    "serverId": "self-1",
+    "ip": "203.0.113.41",
+    "expiresIn": 90,
+    "verificationMode": "none",
+    "verified": null,
+    "lastProbeError": null
+  }
+}

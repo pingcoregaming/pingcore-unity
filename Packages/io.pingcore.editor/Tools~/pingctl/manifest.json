@@ -1,0 +1,31 @@
+{
+  "format": "pingcore-pingctl-bundle/1",
+  "version": "0.1.1",
+  "source": "pingctl 0.1.1 release zips, each checked against the release SHA256SUMS before extraction",
+  "binaries": {
+    "windows-amd64": {
+      "file": "pingctl.exe",
+      "sha256": "56a95f5dd3c79593db90c2e078d116121195d014e58b4f3b75e546d6278fa1ca",
+      "bytes": 6971904,
+      "zip": "pingctl-windows-amd64.zip"
+    },
+    "macos-arm64": {
+      "file": "pingctl",
+      "sha256": "5ad78c0382605dd39c9a7b6fe99a1be3c4bb22026ee3ac83d1cc296b4003612d",
+      "bytes": 6395762,
+      "zip": "pingctl-macos-arm64.zip"
+    },
+    "macos-amd64": {
+      "file": "pingctl",
+      "sha256": "f2feb2bee8ffbea24a88b9d122d60805ee4dc04763ed124409ab7474b0bec5df",
+      "bytes": 6846016,
+      "zip": "pingctl-macos-amd64.zip"
+    },
+    "linux-amd64": {
+      "file": "pingctl",
+      "sha256": "c84dd7a21a8eacbb3a6fa98a98cc17d7948eca19d389d660769673b143a86e17",
+      "bytes": 6705336,
+      "zip": "pingctl-linux-amd64.zip"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "supervisor 1.3.4 test suite",
+  "dto": "PingCore.Fleet.Wire.LocalReservation",
+  "contract": {
+    "source": "supervisor",
+    "method": "GET",
+    "path": "/pingcore/reservations/{reservationId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "reservationId",
+    "serverId",
+    "seats",
+    "playerIds",
+    "context",
+    "expiresAt",
+    "ownerKind",
+    "ownerPlayerId"
+  ],
+  "payload": {
+    "reservationId": "rsv_a1",
+    "serverId": "4211",
+    "seats": 2,
+    "playerIds": [
+      "p-alice",
+      "p-bob"
+    ],
+    "context": {
+      "mode": "duel",
+      "token": "ctx-secret-value-7d1e"
+    },
+    "expiresAt": 1790938560000,
+    "ownerKind": "player",
+    "ownerPlayerId": "p-alice"
+  }
+}

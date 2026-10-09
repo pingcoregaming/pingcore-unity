@@ -1,0 +1,26 @@
+Library/
+Temp/
+Logs/
+obj/
+UserSettings/
+Builds/
+*.csproj
+*.sln
+.vs/
+
+# Left by com.unity.test-framework.performance when a build fails or is refused at preprocess.
+# PingCore.Editor.Cli.BuildHousekeeping removes them, and the empty folder with its .meta, after every
+# ClientBuild and BuildServer run; these lines are only a backstop for an editor killed
+# mid-build. SampleGame has no Resources folder of its own; if it ever gets one, drop the last line.
+Assets/Resources/PerformanceTestRun*
+Assets/Resources/PerformanceTestRun*.meta
+Assets/Resources.meta
+
+# Written by the Package Manager window with nothing but Unity's defaults (the main registry, no scoped
+# registry). SampleGame needs no scoped registry; if it ever does, commit this file instead.
+ProjectSettings/PackageManagerSettings.asset
+
+# never import the Quickstart into SampleGame (GUID collisions): it is a generated copy of Beacon Rush with the
+# same GUIDs and assembly names. These lines keep a stray import out of git.
+Assets/Samples/
+Assets/Samples.meta

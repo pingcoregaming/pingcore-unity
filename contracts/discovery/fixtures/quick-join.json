@@ -1,0 +1,42 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.ReservationResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/quick-join",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "reservationId",
+    "serverId",
+    "status",
+    "seats",
+    "ip",
+    "port",
+    "createdAt",
+    "expiresAt",
+    "ownerKind",
+    "ownerPlayerId",
+    "expiresIn",
+    "replayed"
+  ],
+  "payload": {
+    "error": false,
+    "reservationId": "4271e688-ca36-4206-8a51-f02e26a0047d",
+    "serverId": "agent-a-2",
+    "status": "pending",
+    "seats": 1,
+    "ip": "203.0.113.11",
+    "port": 27015,
+    "createdAt": 1790938375758,
+    "expiresAt": 1790938435758,
+    "ownerKind": "backend",
+    "ownerPlayerId": null,
+    "expiresIn": 60,
+    "replayed": false
+  }
+}

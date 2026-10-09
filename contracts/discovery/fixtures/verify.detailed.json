@@ -1,0 +1,40 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Host.Wire.VerifyReservationResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "GET",
+    "path": "/v1/reservations/verify/{reservationId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "valid",
+    "reservationId",
+    "serverId",
+    "seats",
+    "playerIds",
+    "context",
+    "expiresAt",
+    "ownerKind",
+    "ownerPlayerId"
+  ],
+  "payload": {
+    "error": false,
+    "valid": true,
+    "reservationId": "r-1",
+    "serverId": "agent-a-1",
+    "seats": 1,
+    "playerIds": [
+      "steam:1"
+    ],
+    "context": {
+      "secret": "studio-only"
+    },
+    "expiresAt": 1790938434058,
+    "ownerKind": "backend",
+    "ownerPlayerId": null
+  }
+}

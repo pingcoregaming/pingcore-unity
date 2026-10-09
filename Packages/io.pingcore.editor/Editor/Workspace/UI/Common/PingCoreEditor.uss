@@ -1,0 +1,190 @@
+.pingcore-page {
+    padding: 8px 10px;
+}
+
+.pingcore-title {
+    font-size: 19px;
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+.pingcore-section {
+    margin-top: 10px;
+    margin-bottom: 4px;
+    -unity-font-style: bold;
+}
+
+.pingcore-row {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.pingcore-row > Button {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.pingcore-grow {
+    flex-grow: 1;
+}
+
+.pingcore-note {
+    white-space: normal;
+    color: rgb(150, 150, 150);
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.pingcore-status {
+    white-space: normal;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.pingcore-banner {
+    white-space: normal;
+    padding: 4px 6px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 3px;
+}
+
+.pingcore-banner--info {
+    background-color: rgba(80, 130, 200, 0.18);
+}
+
+.pingcore-banner--warning {
+    background-color: rgba(230, 190, 40, 0.35);
+    color: rgb(30, 25, 0);
+}
+
+.pingcore-banner--error {
+    background-color: rgba(210, 70, 60, 0.30);
+}
+
+.pingcore-step {
+    flex-direction: row;
+    padding: 2px 4px;
+}
+
+.pingcore-step__name {
+    width: 80px;
+    -unity-font-style: bold;
+}
+
+.pingcore-step__state {
+    width: 90px;
+}
+
+.pingcore-step__elapsed {
+    width: 60px;
+    -unity-text-align: middle-right;
+    margin-right: 8px;
+}
+
+.pingcore-step--running {
+    background-color: rgba(80, 130, 200, 0.18);
+}
+
+.pingcore-step--failed {
+    background-color: rgba(210, 70, 60, 0.30);
+}
+
+.pingcore-step--succeeded {
+    background-color: rgba(80, 170, 90, 0.20);
+}
+
+.pingcore-log {
+    min-height: 120px;
+    flex-grow: 1;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.4);
+    margin-top: 4px;
+}
+
+.pingcore-log Label {
+    white-space: normal;
+    font-size: 11px;
+}
+
+.pingcore-json {
+    min-height: 100px;
+    white-space: normal;
+}
+
+.pingcore-card {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 6px 8px;
+    border-width: 1px;
+    border-radius: 4px;
+    border-color: rgba(128, 128, 128, 0.35);
+}
+
+.pingcore-card__header {
+    margin-top: 0;
+}
+
+.pingcore-card__title {
+    font-size: 15px;
+    -unity-font-style: bold;
+}
+
+.pingcore-card__state {
+    white-space: normal;
+    margin-top: 2px;
+    -unity-font-style: italic;
+}
+
+.pingcore-card__body {
+    margin-top: 6px;
+    padding-left: 4px;
+}
+
+.pingcore-chip {
+    margin-left: 10px;
+    padding: 1px 7px;
+    border-radius: 8px;
+    font-size: 11px;
+}
+
+.pingcore-chip--done {
+    background-color: rgba(80, 170, 90, 0.35);
+}
+
+.pingcore-chip--todo {
+    background-color: rgba(230, 190, 40, 0.40);
+    color: rgb(30, 25, 0);
+}
+
+.pingcore-chip--blocked {
+    background-color: rgba(128, 128, 128, 0.30);
+}
+
+.pingcore-primary {
+    -unity-font-style: bold;
+    background-color: rgba(80, 130, 200, 0.45);
+}
+
+.pingcore-table-row {
+    flex-direction: row;
+    padding: 1px 2px;
+}
+
+.pingcore-table-row__label {
+    width: 170px;
+    -unity-font-style: bold;
+}
+
+.pingcore-table-row__value {
+    flex-grow: 1;
+    flex-shrink: 1;
+    white-space: normal;
+}
+
+.pingcore-plan {
+    white-space: normal;
+    font-size: 11px;
+}

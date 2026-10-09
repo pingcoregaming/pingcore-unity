@@ -1,0 +1,19 @@
+{
+    "name": "PingCore.Discovery.Client",
+    "rootNamespace": "PingCore.Discovery.Client",
+    "references": [
+        "PingCore.Core",
+        "PingCore.Unity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,63 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.ServerListResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "GET",
+    "path": "/v1/apps/{publicId}/servers",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "servers",
+    "totalServers",
+    "returned",
+    "limit",
+    "offset"
+  ],
+  "payload": {
+    "error": false,
+    "servers": [
+      {
+        "serverId": "agent-a-ams",
+        "name": "Fleet ams",
+        "ip": "203.0.113.13",
+        "port": 27015,
+        "players": 3,
+        "maxPlayers": 16,
+        "version": "1.0.0",
+        "meta": {
+          "location": "eu-west-ams"
+        }
+      },
+      {
+        "serverId": "agent-a-1",
+        "name": "Fleet agent-a-1",
+        "ip": "203.0.113.10",
+        "port": 27015,
+        "players": 0,
+        "maxPlayers": 16,
+        "version": "1.0.0",
+        "meta": null
+      },
+      {
+        "serverId": "agent-a-2",
+        "name": "Fleet agent-a-2",
+        "ip": "203.0.113.11",
+        "port": 27015,
+        "players": 0,
+        "maxPlayers": 16,
+        "version": "1.0.0",
+        "meta": {
+          "location": "us-east-nyc"
+        }
+      }
+    ],
+    "totalServers": 3,
+    "returned": 3,
+    "limit": 100,
+    "offset": 0
+  }
+}

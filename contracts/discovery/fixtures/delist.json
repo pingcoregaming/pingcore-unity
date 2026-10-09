@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 route handler",
+  "dto": "PingCore.Discovery.Host.Wire.DelistResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "DELETE",
+    "path": "/v1/servers/{serverId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "serverId",
+    "removed"
+  ],
+  "payload": {
+    "error": false,
+    "serverId": "203.0.113.10:27015",
+    "removed": true
+  }
+}

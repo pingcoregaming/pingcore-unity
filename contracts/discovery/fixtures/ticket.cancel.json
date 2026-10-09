@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.CancelTicketResponse",
+  "contract": {
+    "source": "discovery",
+    "method": "DELETE",
+    "path": "/v1/apps/{publicId}/tickets/{ticketId}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "error",
+    "ticketId",
+    "cancelled"
+  ],
+  "payload": {
+    "error": false,
+    "ticketId": "alice-1",
+    "cancelled": true
+  }
+}

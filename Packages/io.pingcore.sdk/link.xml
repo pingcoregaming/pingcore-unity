@@ -1,0 +1,13 @@
+<linker>
+  <!-- The wire DTOs are created and read by reflection (Newtonsoft). Keep the whole of every
+       runtime assembly so IL2CPP stripping never removes a property or constructor.
+       PingCore.Netcode.NGO compiles only when Netcode for GameObjects 2.x is installed, so it is
+       absent from some player builds; ignoreIfMissing is Unity's documented attribute for an
+       assembly that does not exist in every build. -->
+  <assembly fullname="PingCore.Core" preserve="all"/>
+  <assembly fullname="PingCore.Unity" preserve="all"/>
+  <assembly fullname="PingCore.Discovery.Client" preserve="all"/>
+  <assembly fullname="PingCore.Discovery.Host" preserve="all"/>
+  <assembly fullname="PingCore.Fleet" preserve="all"/>
+  <assembly fullname="PingCore.Netcode.NGO" preserve="all" ignoreIfMissing="1"/>
+</linker>

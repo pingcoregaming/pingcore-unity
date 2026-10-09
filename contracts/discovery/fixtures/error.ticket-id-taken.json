@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/tickets",
+    "direction": "error",
+    "status": 409
+  },
+  "keys": [
+    "error",
+    "message",
+    "reason"
+  ],
+  "payload": {
+    "error": true,
+    "message": "That ticketId is already in use. Choose a fresh id (a UUID) or omit ticketId to have one generated, then retry.",
+    "reason": "ticket_id_taken"
+  }
+}

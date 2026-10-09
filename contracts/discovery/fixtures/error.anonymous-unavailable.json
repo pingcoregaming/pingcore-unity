@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/player-tokens",
+    "direction": "error",
+    "status": 503
+  },
+  "keys": [
+    "error",
+    "message",
+    "reason"
+  ],
+  "payload": {
+    "error": true,
+    "message": "Anonymous player tokens are unavailable on this PingCore Discovery deployment: it has no anonymous-token secret configured. This is a gap in PingCore's own deployment configuration, not your app's Player Access setting, so nothing in your workspace can fix it. Use a studio-signed player token or a backend allocate token meanwhile, and contact PingCore support. GET /health reports playerAuth.anonymousAvailable.",
+    "reason": "anonymous_tokens_unavailable"
+  }
+}

@@ -1,0 +1,173 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="BeaconRush.uss" />
+    <ui:VisualElement name="root" class="br-root" picking-mode="Ignore">
+
+        <ui:VisualElement name="screen-menu" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-menu">
+                <ui:Label text="BEACON RUSH" class="br-title" />
+                <ui:Label text="Grab the glowing beacons. First to 10 wins." class="br-subtitle" />
+                <ui:VisualElement name="menu-infra-box">
+                    <ui:Label name="menu-infra" class="br-warning" />
+                    <ui:Label name="menu-infra-detail" class="br-hint" />
+                    <ui:Button name="menu-infra-retry" text="Check again" class="br-link" />
+                </ui:VisualElement>
+                <ui:TextField name="menu-name" label="Display name" max-length="32" class="br-field" />
+                <ui:Label name="menu-profile" class="br-hint" />
+                <ui:Button name="menu-quick" text="Quick play" class="br-button br-primary" />
+                <ui:Button name="menu-find" text="Find match" class="br-button" />
+                <ui:Button name="menu-browse" text="Browse game servers" class="br-button" />
+                <ui:Button name="menu-host" text="Host a game" class="br-button" />
+                <ui:Button name="menu-direct" text="Direct connect" class="br-button" />
+                <ui:VisualElement class="br-row br-links">
+                    <ui:Button name="menu-reservation" text="Join by game server id" class="br-link" />
+                    <ui:Button name="menu-quit" text="Quit" class="br-link" />
+                </ui:VisualElement>
+                <ui:Label name="menu-version" class="br-footnote" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-find" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-form">
+                <ui:Label text="Find match" class="br-heading" />
+                <ui:Label name="find-queue" class="br-hint" />
+                <ui:Toggle name="find-inprogress" label="Also join a match in progress" class="br-toggle" />
+                <ui:Label name="find-status" class="br-status-line" />
+                <ui:Label name="find-ticket" class="br-hint" />
+                <ui:VisualElement class="br-row">
+                    <ui:Button name="find-go" text="Find match" class="br-button br-primary br-grow" />
+                    <ui:Button name="find-cancel" text="Cancel" class="br-button br-grow" />
+                </ui:VisualElement>
+                <ui:Button name="find-back" text="Back" class="br-button br-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-browse" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-wide">
+                <ui:VisualElement class="br-row br-spread">
+                    <ui:Label text="Browse game servers" class="br-heading" />
+                    <ui:VisualElement class="br-row br-tabs">
+                        <ui:Button name="browse-tab-fleet" text="Fleet" class="br-tab" />
+                        <ui:Button name="browse-tab-community" text="Community" class="br-tab" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label name="browse-unconfigured" class="br-warning" />
+                <ui:VisualElement name="browse-body">
+                    <ui:VisualElement class="br-row br-filters">
+                        <ui:Toggle name="browse-slots" label="Free seats only" class="br-toggle" />
+                        <ui:Toggle name="browse-proto" class="br-toggle" />
+                        <ui:TextField name="browse-search" label="Search" max-length="64" class="br-field br-grow" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="br-row br-filters">
+                        <ui:Label text="Sort" class="br-hint br-inline" />
+                        <ui:Button name="browse-sort-players" class="br-chip" />
+                        <ui:Button name="browse-sort-name" class="br-chip" />
+                        <ui:Button name="browse-sort-latency" class="br-chip" />
+                        <ui:VisualElement class="br-grow" />
+                        <ui:Button name="browse-refresh" text="Refresh" class="br-chip" />
+                    </ui:VisualElement>
+                    <ui:Label name="browse-error" class="br-warning" />
+                    <ui:Label name="browse-summary" class="br-hint" />
+                    <ui:VisualElement class="br-row br-table-head">
+                        <ui:Label text="Name" class="br-col-name" />
+                        <ui:Label text="Players" class="br-col-num" />
+                        <ui:Label text="Ping" class="br-col-num" />
+                        <ui:Label text="Version" class="br-col-version" />
+                        <ui:Label text="" class="br-col-action" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="browse-list" class="br-list" />
+                    <ui:VisualElement class="br-row">
+                        <ui:Button name="browse-prev" text="Previous page" class="br-button br-grow" />
+                        <ui:Button name="browse-next" text="Next page" class="br-button br-grow" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Button name="browse-back" text="Back" class="br-button br-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-reservation" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-form">
+                <ui:Label text="Join by game server id" class="br-heading" />
+                <ui:Label text="Reserve a seat on a listed game server by its id, then join it." class="br-hint" />
+                <ui:VisualElement class="br-row br-tabs">
+                    <ui:Button name="reservation-fleet" text="Fleet app" class="br-tab" />
+                    <ui:Button name="reservation-community" text="Community app" class="br-tab" />
+                </ui:VisualElement>
+                <ui:TextField name="reservation-id" label="Game server id" max-length="128" class="br-field" />
+                <ui:Button name="reservation-go" text="Reserve and join" class="br-button br-primary" />
+                <ui:Button name="reservation-back" text="Back" class="br-button br-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-host" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-form">
+                <ui:Label text="Host a game" class="br-heading" />
+                <ui:VisualElement class="br-row br-tabs">
+                    <ui:Button name="host-online" text="Online" class="br-tab" />
+                    <ui:Button name="host-lan" text="LAN only" class="br-tab" />
+                </ui:VisualElement>
+                <ui:Label name="host-token-hint" class="br-hint" />
+                <ui:TextField name="host-port" label="Game port" max-length="5" class="br-field" />
+                <ui:Label name="host-status" class="br-status-line" />
+                <ui:Button name="host-start" text="Start hosting" class="br-button br-primary" />
+                <ui:Button name="host-play" text="Play" class="br-button br-primary" />
+                <ui:Button name="host-stop" text="Stop hosting" class="br-button" />
+                <ui:Button name="host-back" text="Back" class="br-button br-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-direct" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-form">
+                <ui:Label text="Direct connect" class="br-heading" />
+                <ui:Label text="Join a LAN-only host on your network by its address and game port, for example 192.168.1.20:7777." class="br-hint" />
+                <ui:TextField name="direct-address" label="Address" max-length="64" class="br-field" />
+                <ui:Button name="direct-go" text="Connect" class="br-button br-primary" />
+                <ui:Button name="direct-back" text="Back" class="br-button br-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-connecting" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-form">
+                <ui:Label text="Connecting" class="br-heading" />
+                <ui:Label name="connecting-text" class="br-status-line" />
+                <ui:Button name="connecting-cancel" text="Cancel" class="br-button br-secondary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="hud" class="br-screen br-hud" picking-mode="Ignore">
+            <ui:VisualElement class="br-hud-top" picking-mode="Ignore">
+                <ui:VisualElement class="br-panel br-scores" picking-mode="Ignore">
+                    <ui:Label text="SCORES" class="br-caption" />
+                    <ui:VisualElement name="hud-scores" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:VisualElement class="br-hud-centre" picking-mode="Ignore">
+                    <ui:Label name="hud-phase" class="br-phase" />
+                    <ui:Label name="hud-timer" class="br-timer" />
+                </ui:VisualElement>
+                <ui:VisualElement class="br-hud-right" picking-mode="Ignore">
+                    <ui:Button name="hud-leave" text="Leave" class="br-button br-small" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="hud-results" class="br-panel br-results-card" picking-mode="Ignore">
+                <ui:Label text="MATCH OVER" class="br-caption" />
+                <ui:Label name="hud-winner" class="br-winner" />
+                <ui:Label name="hud-next" class="br-hint" />
+            </ui:VisualElement>
+            <ui:Label name="hud-help" text="Move with WASD or the arrow keys. Grab the glowing beacons." class="br-help br-shadowed" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="screen-results" class="br-screen br-centre" picking-mode="Ignore">
+            <ui:VisualElement class="br-panel br-form">
+                <ui:Label name="results-title" class="br-heading" />
+                <ui:Label name="results-winner" class="br-winner" />
+                <ui:Label name="results-reason" class="br-hint" />
+                <ui:VisualElement name="results-scores" />
+                <ui:Button name="results-again" text="Play again" class="br-button br-primary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="status-bar" class="br-status" picking-mode="Ignore">
+            <ui:Label name="status-text" class="br-status-text" />
+            <ui:Button name="status-dismiss" text="Dismiss" class="br-link" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,7 @@
+{
+  "body": "pingcore-body/1",
+  "source": "local SDK endpoint behaviour (supervisor 1.3.4)",
+  "dto": "PingCore.Fleet.Wire.LocalSdkEmpty",
+  "note": "The endpoint answers the self-allocation with an empty object; the spec documents its 200 as `{}` with no schema.",
+  "payload": {}
+}

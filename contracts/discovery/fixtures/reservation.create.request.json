@@ -1,0 +1,20 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Discovery.Client.Wire.ReserveRequest",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/servers/{serverId}/reservations",
+    "direction": "request",
+    "status": 0
+  },
+  "keys": [
+    "reservationId",
+    "seats"
+  ],
+  "payload": {
+    "reservationId": "own-1",
+    "seats": 1
+  }
+}

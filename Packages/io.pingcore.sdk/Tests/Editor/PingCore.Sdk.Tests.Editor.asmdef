@@ -1,0 +1,28 @@
+{
+    "name": "PingCore.Sdk.Tests.Editor",
+    "rootNamespace": "PingCore.Sdk.Tests.Editor",
+    "references": [
+        "PingCore.Core",
+        "PingCore.Discovery.Client",
+        "PingCore.Discovery.Host",
+        "PingCore.Fleet",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

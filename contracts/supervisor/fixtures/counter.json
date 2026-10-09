@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "supervisor 1.3.4 test suite",
+  "dto": "PingCore.Fleet.Wire.CounterView",
+  "contract": {
+    "source": "supervisor",
+    "method": "GET",
+    "path": "/v1beta1/counters/{name}",
+    "direction": "response",
+    "status": 200
+  },
+  "keys": [
+    "name",
+    "count",
+    "capacity"
+  ],
+  "payload": {
+    "name": "players",
+    "count": "3",
+    "capacity": "8"
+  }
+}

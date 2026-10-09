@@ -1,0 +1,9 @@
+{
+  "body": "pingcore-body/1",
+  "source": "local SDK endpoint behaviour (supervisor 1.3.4)",
+  "dto": "PingCore.Fleet.Wire.LocalSdkMessage",
+  "note": "The 400 body of a counter PATCH whose value is not an integer.",
+  "payload": {
+    "message": "count/countDiff/capacity must be integers"
+  }
+}

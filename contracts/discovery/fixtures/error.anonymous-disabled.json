@@ -1,0 +1,22 @@
+{
+  "fixture": "pingcore-fixture/1",
+  "source": "Discovery 1.5.1 test suite",
+  "dto": "PingCore.Core.Wire.ErrorEnvelope",
+  "contract": {
+    "source": "discovery",
+    "method": "POST",
+    "path": "/v1/apps/{publicId}/player-tokens",
+    "direction": "error",
+    "status": 403
+  },
+  "keys": [
+    "error",
+    "message",
+    "reason"
+  ],
+  "payload": {
+    "error": true,
+    "message": "Anonymous player tokens are turned off for this app. Turn them on under Player Access on the app's page in the PingCore workspace (allow up to 60 seconds to apply), or use a studio-signed player token.",
+    "reason": "anonymous_tokens_disabled"
+  }
+}
